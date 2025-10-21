@@ -1,6 +1,24 @@
 import f from './App.module.css'
 import {useEffect, useState} from "react";
 
+// Типы для треков
+interface TrackAttributes {
+    title: string;
+    lyrics?: string;
+    attachments: Array<{
+        url: string;
+    }>;
+}
+
+interface Track {
+    id: string;
+    attributes: TrackAttributes;
+}
+
+interface ApiResponse<T> {
+    data: T;
+}
+
 // const instance = fetch({
 //     withCredentials: true,
 //     baseURL: 'https://musicfun.it-incubator.app/api/1.0',
@@ -11,9 +29,9 @@ import {useEffect, useState} from "react";
 
 function App() {
 
-    const [isSelectedId, setIsSelectedId] = useState(null)
-    const [selectedTrack, setSelectedTrack] = useState(null)
-    const [tracks, setTracks] = useState(null)
+    const [isSelectedId, setIsSelectedId] = useState<string | null>(null)
+    const [selectedTrack, setSelectedTrack] = useState<Track | null>(null)
+    const [tracks, setTracks] = useState<Track[] | null>(null)
 
     // useEffect(() => {
     //     const fetchTracks = async () => {
@@ -42,10 +60,9 @@ function App() {
                 "API-KEY": "07da914e-4e2a-471d-8a65-c920077ef9cb"
             }
         })
-            .then(res => res.json())
-            .then(json => setTracks(json.data))
-            .catch(err => console.error(err))
-
+            .then((res: Response) => res.json())
+            .then((json: ApiResponse<Track[]>) => setTracks(json.data))
+            .catch((err: Error) => console.error(err))
     }, [])
 
     if (!tracks) {
@@ -60,7 +77,7 @@ function App() {
                 setSelectedTrack(null)
             }}>reset
             </button>
-            <div style={{display: "flex", gap: "30px"}}>
+            <div style={{display: "flex", gap: "50px"}}>
                 <ul>
                     {
                         tracks.map((track) => {
@@ -69,14 +86,19 @@ function App() {
                                         className={track.id === isSelectedId ? f.track : ''}>
                                         <div onClick={() => {
                                             setIsSelectedId(track.id)
+                                            setSelectedTrack(null)
                                             fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/`+ track.id , {
                                                 headers: {
                                                     "API-KEY": "07da914e-4e2a-471d-8a65-c920077ef9cb"
                                                 }
                                             })
-                                                .then(res => res.json())
-                                                .then(json => setSelectedTrack(json.data))
-                                                .catch(err => console.error(err))
+                                                .then((res: Response) => res.json())
+                                                .then((json: ApiResponse<Track>) => {
+                                                    setSelectedTrack(json.data)
+                                                })
+                                                .catch((err: Error) => {
+                                                    console.error(err)
+                                                })
                                         }}> {track.attributes.title} </div>
                                         <audio src={track.attributes.attachments[0].url} controls/>
                                     </li>
@@ -86,16 +108,17 @@ function App() {
                 <div>
                     <h2>Details</h2>
                     {
-                        selectedTrack === null ?
+                        isSelectedId === null ?
                             "Track is not selected" :
-                            <div>
-                                {selectedTrack.attributes.title}
-                                <h2> Lyrics: </h2>
-                                    {selectedTrack.attributes.lyrics ?? "No lyrics"}
-
-
-                            </div>
-                    }</div>
+                            selectedTrack === null ?
+                                "Loading..." :
+                                <div>
+                                    {selectedTrack.attributes.title}
+                                    <h2> Lyrics: </h2>
+                                        {selectedTrack.attributes.lyrics ?? "No lyrics"}
+                                </div>
+                    }
+                 </div>
             </div>
         </div>
     )
