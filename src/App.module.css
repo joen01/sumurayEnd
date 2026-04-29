@@ -1,6 +1,60 @@
+
 .track {
-  background-color: #747bff;
-  border-radius: 6px;
-  padding: 8px 12px;
+    background-color: #747bff;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+button {
+    margin: 30px 0 0 auto;
+    border-radius: 20px;
+    width: 500px;
+}
+
+button:hover {
+    background-color: #a4a9ff;
+    transition-duration: 500ms;
+}
+
+button:active {
+    background-color: #2a2f9c;
+}
+
+
+.header {
+    padding: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    background-color: #a8abec;
+    align-items: center;
+}
+
+.header img {
+    width: 150px;
+}
+
+.music_content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.detalis {
+    top: 20px;
+    height: 400px;
+    position: sticky;
+    padding: 30px;
+    border-left: 2px solid gray;
+    border-radius: 3px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(179, 168, 168);
+    height: 50px;
+    align-items: center;
 }
 

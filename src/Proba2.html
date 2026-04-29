@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Вход в личный кабинет</title>
+    <link rel="stylesheet" href="Styles11.css">
+</head>
+<body>
+<main class="login" role="main">
+    <header class="login__header">
+        <h1 class="login__title">Войти в личный кабинет</h1>
+    </header>
+
+    <div class="login__illustration" aria-hidden="true">
+        <img src="illustration.png" alt="Иллюстрация: вход в личный кабинет" class="login__image">
+    </div>
+
+    <form class="login__form" action="/login" method="POST" autocomplete="on" novalidate>
+        <div class="login__errors" id="login-errors" aria-live="assertive" role="alert" hidden></div>
+
+        <div class="login__group">
+            <label for="login-identifier" class="login__label"></label>
+            <input
+                    id="login-identifier"
+                    name="identifier"
+                    class="login__input"
+                    type="text"
+                    placeholder="Email или телефон"
+                    required
+                    aria-describedby="identifier-desc"
+                    inputmode="email"
+                    autocomplete="username"
+            >
+            <div id="identifier-desc" class="login__hint"></div>
+            <div class="login__field-error" id="identifier-error" aria-live="polite" hidden></div>
+        </div>
+
+        <div class="login__group">
+            <label for="login-password" class="login__label"></label>
+            <input
+                    id="login-password"
+                    name="password"
+                    class="login__input"
+                    type="password"
+                    placeholder="Пароль"
+                    required
+                    autocomplete="current-password"
+            >
+            <div class="login__field-error" id="password-error" aria-live="polite" hidden></div>
+        </div>
+
+        <div class="login__controls">
+            <a href="/password-reset" class="login__help" aria-label="Восстановить пароль">Не удаётся войти?</a>
+            <button type="submit" class="login__button login__button--primary">Войти</button>
+        </div>
+    </form>
+
+    <footer class="login__footer">
+        <small class="login__copy">Copyright © <span id="copyright-year">2024</span> SPBlink</small>
+    </footer>
+</main>
+</body>
+</html>

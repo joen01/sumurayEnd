@@ -1,0 +1,165 @@
+:root {
+    --bg: #f5f5f5;
+    --card: #fff;
+    --brand: #007bff;
+    --brand-dark: #0056b3;
+    --muted: #6c757d;
+    --radius: 8px;
+    --max-width: 360px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #111;
+}
+
+.login {
+    width: 100%;
+    max-width: var(--max-width);
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.login__header {
+    background: var(--brand);
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+}
+
+.login__title {
+    font-size: 18px;
+}
+
+.login__illustration {
+    padding: 12px;
+    text-align: center;
+}
+
+.login__image {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.login__form {
+    padding: 12px;
+}
+
+.login__group {
+    margin-bottom: 12px;
+}
+
+.login__label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.login__hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.login__input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+}
+
+.login__input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12);
+}
+
+.login__errors {
+    background: #fff4f4;
+    color: #8b0000;
+    border: 1px solid #f1c0c0;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.login__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.login__help {
+    color: var(--brand);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login__help:hover {
+    text-decoration: underline;
+}
+
+.login__button {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.login__button--primary {
+    background: var(--brand);
+    color: #fff;
+}
+
+.login__button--primary:hover {
+    background: var(--brand-dark);
+}
+
+.login__footer {
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+}
+
+.login__copy {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 380px) {
+    .login {
+        border-radius: 6px;
+    }
+
+    .login__controls {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .login__help {
+        text-align: center;
+    }
+}
