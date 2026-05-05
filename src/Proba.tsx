@@ -34,10 +34,10 @@ export function Proba() {
 
 
 function Counter() {
-    const {value, inc, isDisabled} = useCounter(5, 5000)
-
+    const {value, inc, isDisabled} = useCounter(0, 10000)
+const onInc = () => {inc()}
     return <div>
-        <button disabled={isDisabled} onClick={inc}>{value}</button>
+        <button disabled={isDisabled} onClick={onInc}>{value}</button>
     </div>
 }
 
@@ -46,8 +46,10 @@ function useCounter(initValue: number, ms: number) {
     const [value, setValue] = useState(initValue)
     const [isDisabled, setIsDisabled] = useState(false)
 
+    const inc = () => setValue(value + 1)
+
     useEffect(() => {
-        if (value === 15) {
+        if (value === 10) {
             setIsDisabled(true)
         }
     }, [value])
@@ -59,14 +61,10 @@ function useCounter(initValue: number, ms: number) {
         }, ms);
         return () => {
             clearInterval(interval)
-        };
+        }
     }, [initValue, ms])
 
 
-    return {
-        value,
-        inc: () => setValue(value + 1),
-        isDisabled
-    }
+    return {value, inc, isDisabled}
 
 }
