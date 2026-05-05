@@ -14,6 +14,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+
     steps:
       # 1. Получить код из репозитория
       - name: Checkout code
