@@ -9,39 +9,36 @@ permissions:
   pages: write
   id-token: write
 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
 
     steps:
       # 1. Получить код из репозитория
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Установить Node.js (если проект на JS/TS)
+      # 2. Установить Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      # 3. Установить зависимости
+      # 3. Установить зависимости (лучше использовать npm ci для воспроизводимости)
       - name: Install dependencies
-        run: npm install
+        run: npm ci    # или npm install, если нет lock-файла
 
       # 4. Собрать проект
       - name: Build project
         run: npm run build
 
-      # 5. выгрузи папку dest
+      # 5. Загрузка артефакта для Pages
       - name: Upload-pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist   # убедитесь, что сборка кладёт результат в dist
 
-      # 6. деплой на GitHub Pages (для статики)
+      # 6. Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-
