@@ -7,7 +7,7 @@ import TrackDetails from './TrackDetails'
 import TrackList from './TrackList'
 import type { Track } from './types'
 import s from '../App.module.css'
-import {Proba} from "../Proba";
+import {Proba} from "../Proba.tsx";
 
 const MainPage = () => {
 
