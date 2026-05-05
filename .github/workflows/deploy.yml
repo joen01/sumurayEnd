@@ -12,6 +12,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       # 1. Получить код из репозитория
@@ -33,12 +36,17 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # 5. Загрузка артефакта для Pages
+      # 5. Подготовка Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # 6. Загрузка артефакта для Pages
       - name: Upload-pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist   # убедитесь, что сборка кладёт результат в dist
 
-      # 6. Деплой на GitHub Pages
+      # 7. Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
